@@ -1,9 +1,8 @@
 body {
-    background-color: #0C0CF6; /*warna kuning cerah */
+    background-color: #0C0CF6; /* latar belakang biru cerah */
     font-family: Arial, sans-serif; /*jenis huruf yang bersih dsn mudah dibaca */
-    color: 191970;
+    color: 191970; /*
 }
-
 .kartu profil { 
     width: 300px;
     margin: 50px auto;
