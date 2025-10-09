@@ -7,7 +7,7 @@
 <body>
         <div class="kartu-profil">
         <img src="foto-profil.jpg" alt=foto profil saya">
-        <h1>name lengkap anda</h1>
+        <h1>uptoarf</h1>
         <P>siswa SMA  yang tertarik dengan teknologi dan desain. selamat datang di website pertama saya!</p> 
         <a href="https://www.instagram.com/uptoarf">kunjungi instagram saya</a>
         <button id="sapabutton">sapa saya!</button>
