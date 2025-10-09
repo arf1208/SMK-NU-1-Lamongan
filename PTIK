@@ -1,18 +1,25 @@
 <!doctype html>
-<html>
+<html lang="id">
 <head>
-        <title> profil digital - [profil saya] </title>
-        <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Digital - Nama Lengkap Anda</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-        <div class="kartu-profil">
-        <img src= "img001.jpg" alt=foto profil saya">
-        <h1>name lengkap anda</h1>
-        <P>siswa SMA  yang tertarik dengan teknologi dan desain. selamat datang di website pertama saya!</p> 
-        <a href="https://www.instagram.com/uptoarf">kunjungi instagram saya</a>
-        <button id="sapabutton">sapa saya!</button>
-     </div>
-<script src="script.js"></script>
+    <div class="kartu-profil">
+        <img src="img001.jpg" alt="Foto Profil Saya">
+        <h1>Nama Lengkap Anda</h1>
+        <p>Siswa SMA yang tertarik dengan teknologi dan desain. Selamat datang di website pertama saya!</p>
+        
+        <a href="https://www.instagram.com/uptoarf" target="_blank" class="tombol-tautan">Kunjungi Instagram Saya</a>
+        
+        <button id="sapaButton">Sapa Saya!</button>
+        
+        <p id="pesanOutput"></p>
+
+    </div>
+    
+    <script src="script.js"></script>
 </body>
 </html>
-
