@@ -2,7 +2,7 @@
 <html>
 <head>
         <title>profil digital - [profil saya]</title>
-        <link rel="atylesheet" href="style.css">
+        <link rel="stylesheet" href="style.css">
 </head>
 <body>
         <div class="kartu-profil">
