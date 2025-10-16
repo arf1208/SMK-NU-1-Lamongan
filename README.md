@@ -1,21 +1,24 @@
-# Dapur Nusantara
-**Koleksi Resep Otentik dari Sabang sampai Merauke**
+# RempahRasa: Jejak Rasa Nusantara
 
-Dapur Nusantara adalah platform digital yang didedikasikan untuk melestarikan dan membagikan resep masakan tradisional dan modern khas Indonesia dari berbagai daerah. Fokus kami adalah pada otentisitas dan keragaman kuliner Nusantara.
+RempahRasa adalah *website* koleksi resep yang didedikasikan untuk mendokumentasikan dan mempromosikan kekayaan kuliner Indonesia. Kami menyajikan resep otentik dari Sabang hingga Merauke, dikemas dengan tampilan yang menarik dan mudah dicari. Tujuan kami adalah menjadi ensiklopedia digital warisan rasa Nusantara.
 
 ## Fitur Utama
-- **Pencarian Daerah:** Cari resep berdasarkan asal daerah (misalnya, Jawa, Sumatera, Bali, Sulawesi).
-- **Filter Jenis Masakan:** Filter berdasarkan kategori (misalnya, Soto, Sate, Sayur, Kue Tradisional).
-- **Gambar Otomatis:** Menggunakan API pihak ketiga (misalnya, Unsplash atau Pexels *jika diizinkan*) atau placeholder cerdas untuk representasi visual resep.
-- **Tampilan Responsif:** Desain yang optimal untuk perangkat apa pun.
+- **Visual Otomatis:** Setiap kartu resep menarik gambar yang relevan secara otomatis menggunakan kata kunci (simulasi melalui Unsplash *placeholder*).
+- **Filter Regional:** Filter cepat berdasarkan wilayah/pulau (Jawa, Sumatera, Kalimantan, dll.) untuk memudahkan penemuan resep daerah.
+- **Pencarian Cepat:** Mencari resep berdasarkan nama, bahan, atau daerah asal.
+- **Responsif:** Tampilan yang optimal di perangkat *desktop* maupun *mobile* menggunakan Flexbox dan Grid.
 
 ## Teknologi yang Digunakan
-- **Frontend:** HTML5, CSS3 (Flexbox/Grid), JavaScript (ES6+).
-- **Styling:** CSS Murni dengan aksen warna yang hangat (terinspirasi dari rempah).
+- **HTML5:** Struktur semantik yang bersih.
+- **CSS3:** Styling modern, fokus pada visual yang kaya dan hangat.
+- **JavaScript (ES6+):** Digunakan untuk manipulasi DOM, *filtering* data resep, dan *rendering* kartu resep.
 
 ## Instalasi dan Menjalankan Proyek
 
+Proyek ini sangat mudah dijalankan karena tidak memerlukan *server* atau *backend* khusus.
+
 1. **Clone Repositori:**
+   Buka Terminal atau Command Prompt Anda dan salin proyek ini:
    ```bash
    git clone [https://www.andarepository.com/](https://www.andarepository.com/)
-   cd DapurNusantara
+   cd RempahRasa
