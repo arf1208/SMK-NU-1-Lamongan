@@ -3,110 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>e-Layan Warga | Solusi Digital Layanan Publik</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="style.css"> 
+    <title>CuanCerdas - Pencatat Keuangan</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="container">
+        <h1>CuanCerdas 💸</h1>
+        <h2>Saldo Saat Ini:</h2>
+        <div id="saldo-total" class="saldo-total">Rp 0</div>
 
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="#page-top"><i class="fas fa-handshake me-2"></i> e-Layan</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                Menu
-                <i class="fas fa-bars ms-1"></i>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                    <li class="nav-item"><a class="nav-link" href="#layanan">Layanan</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#alur">Alur</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#kontak">Kontak</a></li>
-                    <li class="nav-item"><a class="btn btn-warning btn-sm ms-3 d-none d-lg-block" href="login.php">LOGIN</a></li>
+        <div class="form-transaksi">
+            <h3>Tambah Transaksi Baru</h3>
+            <form id="form-transaksi">
+                <div>
+                    <label for="deskripsi">Deskripsi:</label>
+                    <input type="text" id="deskripsi" placeholder="Misal: Beli Kopi" required>
+                </div>
+                <div>
+                    <label for="jumlah">Jumlah (Nilai Positif untuk Pemasukan, Negatif untuk Pengeluaran):</label>
+                    <input type="number" id="jumlah" placeholder="Misal: 50000 (Pemasukan) atau -15000 (Pengeluaran)" required>
+                </div>
+                <button type="submit" class="btn">Catat!</button>
+            </form>
+        </div>
+
+        <div class="riwayat">
+            <h3>Riwayat Transaksi</h3>
+            <ul id="list-transaksi">
                 </ul>
-            </div>
         </div>
-    </nav>
+    </div>
 
-    <header class="masthead">
-        <div class="container">
-            <div class="masthead-subheading">Selamat datang di e-Layan Warga!</div>
-            <div class="masthead-heading text-uppercase">Solusi Digital Layanan Publik</div>
-            <a class="btn btn-primary btn-xl text-uppercase" href="#layanan">Mulai Urus Dokumen</a>
-        </div>
-    </header>
-
-    <section class="page-section" id="layanan">
-        <div class="container">
-            <div class="text-center">
-                <h2 class="section-heading text-uppercase">Layanan Tersedia</h2>
-                <h3 class="section-subheading text-muted">Pilih layanan yang Anda butuhkan, mudah dan cepat.</h3>
-            </div>
-            <div class="row text-center">
-                <div class="col-md-4 mb-4">
-                    <span class="fa-stack fa-4x">
-                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fas fa-file-alt fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <h4 class="my-3">Administrasi Kependudukan</h4>
-                    <p class="text-muted">Pengajuan Surat Pengantar RT/RW, surat domisili, dan surat keterangan lainnya secara online.</p>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <span class="fa-stack fa-4x">
-                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fas fa-bullhorn fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <h4 class="my-3">Pengaduan Masyarakat</h4>
-                    <p class="text-muted">Laporkan masalah lingkungan, fasilitas publik, atau pelayanan dengan cepat dan anonim (opsional).</p>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <span class="fa-stack fa-4x">
-                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fas fa-wallet fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <h4 class="my-3">Info Keuangan & Iuran</h4>
-                    <p class="text-muted">Cek status pembayaran iuran lingkungan (kebersihan, keamanan) dan transparansi dana kas RT/RW.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="page-section bg-light" id="alur">
-        <div class="container">
-            <div class="text-center">
-                <h2 class="section-heading text-uppercase">Alur Pelayanan Digital</h2>
-                <h3 class="section-subheading text-muted">Proses yang transparan, dari awal hingga akhir.</h3>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <ul class="timeline">
-                        <li><div class="timeline-panel"><div class="timeline-heading"><h4>Langkah 1</h4><h4 class="subheading">Registrasi & Login</h4></div><div class="timeline-body"><p class="text-muted">Daftar menggunakan NIK Anda, lalu masuk ke dashboard e-Layan.</p></div></div></li>
-                        <li class="timeline-inverted"><div class="timeline-panel"><div class="timeline-heading"><h4>Langkah 2</h4><h4 class="subheading">Pengajuan Online</h4></div><div class="timeline-body"><p class="text-muted">Isi formulir pengajuan dokumen yang Anda butuhkan (Surat Keterangan, dll.).</p></div></div></li>
-                        <li><div class="timeline-panel"><div class="timeline-heading"><h4>Langkah 3</h4><h4 class="subheading">Tracking Status</h4></div><div class="timeline-body"><p class="text-muted">Pantau status dokumen Anda secara real-time, dari persetujuan RT hingga kelurahan.</p></div></div></li>
-                        <li class="timeline-inverted"><div class="timeline-panel"><div class="timeline-heading"><h4>Selesai!</h4><h4 class="subheading">Pengambilan Dokumen</h4></div><div class="timeline-body"><p class="text-muted">Ambil dokumen yang sudah jadi, atau cetak mandiri jika diizinkan oleh kebijakan setempat.</p></div></div></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer py-4">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-4 text-lg-start">&copy; 2024 e-Layan Warga. Dibuat Mandiri.</div>
-                <div class="col-lg-4 my-3 my-lg-0">
-                    <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
-                </div>
-                <div class="col-lg-4 text-lg-end">
-                    <a class="link-dark text-decoration-none me-3" href="#!">Kebijakan Privasi</a>
-                    <a class="link-dark text-decoration-none" href="#!">Syarat Penggunaan</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
