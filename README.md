@@ -1,22 +1,21 @@
-# The Culinary Atlas
-**Peta Dunia Kuliner: Semua Resep dari Seluruh Penjuru Dunia**
+# Dapur Nusantara
+**Koleksi Resep Otentik dari Sabang sampai Merauke**
 
-The Culinary Atlas adalah platform digital yang didedikasikan untuk mengumpulkan dan membagikan resep makanan autentik dari berbagai negara dan budaya di seluruh dunia. Tujuan kami adalah menjadi sumber daya terlengkap bagi para pecinta kuliner dan koki rumahan.
+Dapur Nusantara adalah platform digital yang didedikasikan untuk melestarikan dan membagikan resep masakan tradisional dan modern khas Indonesia dari berbagai daerah. Fokus kami adalah pada otentisitas dan keragaman kuliner Nusantara.
 
 ## Fitur Utama
-- **Pencarian Global:** Cari resep berdasarkan negara, bahan utama, atau jenis masakan (misalnya, Italia, Ramen, Vegan).
-- **Filter Interaktif:** Filter resep berdasarkan benua, tingkat kesulitan, atau waktu persiapan.
-- **Tampilan Responsif:** Desain yang optimal untuk perangkat *desktop*, *tablet*, dan *mobile*.
-- **Integrasi API (TBD):** Rencana untuk mengintegrasikan dengan API resep eksternal (misalnya, TheMealDB) atau *backend* kustom.
+- **Pencarian Daerah:** Cari resep berdasarkan asal daerah (misalnya, Jawa, Sumatera, Bali, Sulawesi).
+- **Filter Jenis Masakan:** Filter berdasarkan kategori (misalnya, Soto, Sate, Sayur, Kue Tradisional).
+- **Gambar Otomatis:** Menggunakan API pihak ketiga (misalnya, Unsplash atau Pexels *jika diizinkan*) atau placeholder cerdas untuk representasi visual resep.
+- **Tampilan Responsif:** Desain yang optimal untuk perangkat apa pun.
 
 ## Teknologi yang Digunakan
 - **Frontend:** HTML5, CSS3 (Flexbox/Grid), JavaScript (ES6+).
-- **Styling:** CSS Murni atau potensi penggunaan *framework* seperti Tailwind CSS (opsional, untuk proyek ini kita gunakan CSS murni).
+- **Styling:** CSS Murni dengan aksen warna yang hangat (terinspirasi dari rempah).
 
 ## Instalasi dan Menjalankan Proyek
 
 1. **Clone Repositori:**
    ```bash
    git clone [https://www.andarepository.com/](https://www.andarepository.com/)
-   cd TheCulinaryAtlas
-   
+   cd DapurNusantara
