@@ -1,6 +1,6 @@
-# RempahRasa: Jejak Rasa Nusantara
+# DapurNusantara: Jejak Rasa Nusantara
 
-RempahRasa adalah *website* koleksi resep yang didedikasikan untuk mendokumentasikan dan mempromosikan kekayaan kuliner Indonesia. Kami menyajikan resep otentik dari Sabang hingga Merauke, dikemas dengan tampilan yang menarik dan mudah dicari. Tujuan kami adalah menjadi ensiklopedia digital warisan rasa Nusantara.
+DapurNusantara adalah *website* koleksi resep yang didedikasikan untuk mendokumentasikan dan mempromosikan kekayaan kuliner Indonesia. Kami menyajikan resep otentik dari Sabang hingga Merauke, dikemas dengan tampilan yang menarik dan mudah dicari. Tujuan kami adalah menjadi ensiklopedia digital warisan rasa Nusantara.
 
 ## Fitur Utama
 - **Visual Otomatis:** Setiap kartu resep menarik gambar yang relevan secara otomatis menggunakan kata kunci (simulasi melalui Unsplash *placeholder*).
