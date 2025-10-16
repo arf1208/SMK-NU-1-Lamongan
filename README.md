@@ -1,27 +1,22 @@
-# FinGo: Financial Goal Tracker
+# The Culinary Atlas
+**Peta Dunia Kuliner: Semua Resep dari Seluruh Penjuru Dunia**
 
-FinGo adalah aplikasi web sederhana yang dirancang untuk membantu pengguna melacak kemajuan mereka dalam mencapai tujuan keuangan (Financial Goals). Aplikasi ini fokus pada antarmuka yang bersih dan fungsionalitas dasar untuk mencatat target, jumlah yang sudah terkumpul, dan persentase kemajuan.
+The Culinary Atlas adalah platform digital yang didedikasikan untuk mengumpulkan dan membagikan resep makanan autentik dari berbagai negara dan budaya di seluruh dunia. Tujuan kami adalah menjadi sumber daya terlengkap bagi para pecinta kuliner dan koki rumahan.
 
-## Fitur
-
-* **Pencatatan Tujuan:** Memungkinkan pengguna memasukkan nama tujuan dan target jumlah uang.
-* **Pelacakan Kemajuan:** Menampilkan jumlah uang yang sudah terkumpul dan target.
-* **Visualisasi Persentase:** Menampilkan kemajuan dalam bentuk persentase dan *progress bar* visual.
-* **Desain Responsif:** Tampilan yang optimal di berbagai ukuran layar (dasar).
+## Fitur Utama
+- **Pencarian Global:** Cari resep berdasarkan negara, bahan utama, atau jenis masakan (misalnya, Italia, Ramen, Vegan).
+- **Filter Interaktif:** Filter resep berdasarkan benua, tingkat kesulitan, atau waktu persiapan.
+- **Tampilan Responsif:** Desain yang optimal untuk perangkat *desktop*, *tablet*, dan *mobile*.
+- **Integrasi API (TBD):** Rencana untuk mengintegrasikan dengan API resep eksternal (misalnya, TheMealDB) atau *backend* kustom.
 
 ## Teknologi yang Digunakan
+- **Frontend:** HTML5, CSS3 (Flexbox/Grid), JavaScript (ES6+).
+- **Styling:** CSS Murni atau potensi penggunaan *framework* seperti Tailwind CSS (opsional, untuk proyek ini kita gunakan CSS murni).
 
-* **HTML5:** Struktur dasar halaman.
-* **CSS3:** Styling dan tata letak.
-* **JavaScript (Vanilla JS):** Logika inti untuk manajemen data tujuan dan interaktivitas.
+## Instalasi dan Menjalankan Proyek
 
-## Cara Menjalankan
-
-1.  *Clone* atau unduh repositori ini.
-2.  Buka berkas `index.html` di *browser* modern apapun (Chrome, Firefox, Edge, dll.).
-3.  Nikmati pelacakan tujuan keuangan Anda!
-
-## Status Proyek
-
-* **Versi:** 1.0 (Kerangka Dasar)
-* **Rencana Pengembangan:** Penambahan fungsionalitas seperti penyimpanan data lokal (LocalStorage), fitur edit/hapus tujuan, dan validasi input.
+1. **Clone Repositori:**
+   ```bash
+   git clone [https://www.andarepository.com/](https://www.andarepository.com/)
+   cd TheCulinaryAtlas
+   
