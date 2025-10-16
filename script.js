@@ -4,39 +4,41 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchButton = document.getElementById('searchButton');
     const filterButtons = document.querySelectorAll('.filters button');
 
-    // Data resep Indonesia (simulasi)
+    // Data resep Indonesia (simulasi data backend)
+    // Dalam proyek nyata, data ini diambil dari API atau JSON file besar
     const allRecipes = [
-        { name: "Rendang Daging Sapi", region: "sumatera", tags: ["daging", "pedas", "minang"], description: "Masakan khas Minangkabau yang dimasak dengan santan dan rempah.", imageKeyword: "rendang" },
-        { name: "Soto Ayam Lamongan", region: "jawa", tags: ["kuah", "ayam", "jawa-timur"], description: "Sup ayam berkuah kuning dengan koya dan telur.", imageKeyword: "soto-ayam" },
-        { name: "Nasi Goreng Kampung", region: "jawa", tags: ["nasi", "cepat-saji", "pedas"], description: "Hidangan nasi yang digoreng dengan bumbu sederhana dan telur.", imageKeyword: "nasi-goreng" },
-        { name: "Sate Lilit Ikan", region: "bali", tags: ["ikan", "sate", "pedas"], description: "Sate khas Bali dengan daging ikan cincang yang dililitkan.", imageKeyword: "sate-lilit" },
-        { name: "Pempek Kapal Selam", region: "sumatera", tags: ["ikan", "palembang", "kuah-cuko"], description: "Makanan dari ikan dan sagu yang disajikan dengan kuah cuka.", imageKeyword: "pempek" },
-        { name: "Coto Makassar", region: "sulawesi", tags: ["daging", "sup", "makassar"], description: "Sup daging khas Makassar dengan bumbu rempah yang kental.", imageKeyword: "coto-makassar" },
-        { name: "Papeda Kuah Kuning", region: "papua", tags: ["sagu", "ikan", "papua"], description: "Bubur sagu yang disajikan dengan ikan kuah kuning pedas.", imageKeyword: "papeda" },
+        { name: "Rendang Daging Sapi", region: "sumatera", tags: ["daging", "pedas", "minang"], description: "Raja masakan Indonesia, kaya santan dan rempah.", imageKeyword: "rendang" },
+        { name: "Gudeg Jogja", region: "jawa", tags: ["nangka", "manis", "jawa-tengah"], description: "Nangka muda dimasak santan dengan rasa manis legit.", imageKeyword: "gudeg" },
+        { name: "Soto Betawi", region: "jawa", tags: ["kuah", "santan", "daging"], description: "Soto khas Jakarta dengan kuah susu atau santan kental.", imageKeyword: "soto-betawi" },
+        { name: "Ayam Betutu", region: "bali", tags: ["ayam", "pedas", "panggang"], description: "Ayam utuh berisi bumbu pedas khas Bali, dipanggang.", imageKeyword: "ayam-betutu" },
+        { name: "Coto Makassar", region: "sulawesi", tags: ["daging", "sup", "makassar"], description: "Sup daging berkaldu kental dan rempah khas Makassar.", imageKeyword: "coto-makassar" },
+        { name: "Nasi Liwet Solo", region: "jawa", tags: ["nasi", "santan", "solo"], description: "Nasi gurih dimasak santan, disajikan dengan lauk pauk.", imageKeyword: "nasi-liwet" },
+        { name: "Papeda Ikan Kuah Kuning", region: "timur", tags: ["sagu", "ikan", "papua"], description: "Bubur sagu lengket disajikan dengan ikan kakap kuah kunyit pedas.", imageKeyword: "papeda" },
+        { name: "Sate Lilit Ikan Laut", region: "bali", tags: ["sate", "ikan", "seafood"], description: "Daging ikan cincang yang dililitkan pada batang serai.", imageKeyword: "sate-lilit" },
+        { name: "Sayur Asem", region: "jawa", tags: ["sayur", "kuah", "segar"], description: "Sayur berkuah asam manis dengan kacang panjang dan melinjo.", imageKeyword: "sayur-asem" }
     ];
 
     /**
-     * Fungsi untuk mendapatkan URL gambar placeholder berdasarkan kata kunci
-     * Menggunakan layanan yang bersifat placeholder/demo
-     * @param {string} keyword - Kata kunci untuk gambar
-     * @returns {string} URL gambar
+     * Mendapatkan URL gambar placeholder otomatis dari Unsplash
+     * @param {string} keyword - Kata kunci untuk pencarian gambar
+     * @returns {string} URL gambar Unsplash
      */
     function getPlaceholderImage(keyword) {
-        // Menggunakan Picsum atau sejenisnya. Di sini saya pakai Placehold.co sebagai demo
-        // Dalam implementasi nyata, ganti dengan aset Anda sendiri
+        // Membersihkan dan menggabungkan kata kunci untuk URL yang valid
         const seed = keyword.replace(/\s/g, '-').toLowerCase();
-        // Contoh: Menggunakan URL untuk ilustrasi masakan
-        return `https://source.unsplash.com/random/400x300/?food,indonesian,${seed}`;
+        
+        // Menggunakan Unsplash API untuk mendapatkan gambar acak berdasarkan keyword
+        return `https://source.unsplash.com/random/400x300/?indonesian-food,${seed}`;
     }
 
     /**
-     * Fungsi untuk me-render daftar resep ke HTML
+     * Fungsi untuk me-render (menggambarkan) daftar resep ke HTML
      */
     function renderRecipes(recipes) {
-        recipesContainer.innerHTML = ''; 
+        recipesContainer.innerHTML = ''; // Kosongkan konten sebelumnya
 
         if (recipes.length === 0) {
-            recipesContainer.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; color: #666;">Maaf, resep yang Anda cari belum tersedia di Dapur Nusantara.</p>';
+            recipesContainer.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; color: #666; font-size: 1.2rem;">Maaf, tidak ada resep yang sesuai di RempahRasa.</p>';
             return;
         }
 
@@ -44,14 +46,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const card = document.createElement('div');
             card.className = 'recipe-card';
             
-            // Dapatkan URL Gambar Otomatis
             const imageUrl = getPlaceholderImage(recipe.imageKeyword || recipe.name);
 
             card.innerHTML = `
-                <img src="${imageUrl}" alt="${recipe.name}" loading="lazy" onerror="this.onerror=null;this.src='./assets/images/default.jpg';">
+                <img src="${imageUrl}" 
+                     alt="${recipe.name}" 
+                     loading="lazy" 
+                     onerror="this.onerror=null;this.src='./assets/images/default.jpg';"> 
                 <div class="card-content">
                     <h3>${recipe.name}</h3>
-                    <p>Dari: ${recipe.region.toUpperCase()} - ${recipe.description}</p>
+                    <p>Daerah Asal: **${recipe.region.toUpperCase()}** - ${recipe.description}</p>
                     <a href="#">Lihat Resep Lengkap</a>
                 </div>
             `;
@@ -67,7 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const filteredRecipes = allRecipes.filter(recipe => 
             recipe.name.toLowerCase().includes(query) || 
             recipe.region.toLowerCase().includes(query) ||
-            recipe.description.toLowerCase().includes(query) ||
             recipe.tags.some(tag => tag.includes(query))
         );
         renderRecipes(filteredRecipes);
@@ -88,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
         renderRecipes(filteredRecipes);
     }
 
-    // EVENT LISTENERS
+    // --- EVENT LISTENERS ---
 
     // 1. Pencarian
     searchButton.addEventListener('click', filterBySearch);
@@ -110,6 +113,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Inisialisasi: Muat semua resep saat pertama kali halaman dimuat
-    renderRecipes(allRecipes);
+    // Inisialisasi: Tampilkan resep dari wilayah Jawa saat pertama kali dimuat
+    filterByRegion('jawa');
 });
