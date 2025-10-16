@@ -1,87 +1,96 @@
-// script.js
-const saldoTotal = document.getElementById('saldo-total');
-const listTransaksi = document.getElementById('list-transaksi');
-const formTransaksi = document.getElementById('form-transaksi');
-const deskripsiInput = document.getElementById('deskripsi');
-const jumlahInput = document.getElementById('jumlah');
+// Data Array untuk menyimpan semua tujuan keuangan
+let financialGoals = [];
 
-// Array dummy untuk menyimpan transaksi
-let transaksi = []; // Di aplikasi nyata, ini biasanya disimpan di Local Storage atau Database
+// Mendapatkan referensi elemen DOM
+const form = document.getElementById('add-goal-form');
+const goalsContainer = document.getElementById('goals-container');
+const noGoalsMessage = document.getElementById('no-goals-message');
 
-// Fungsi untuk memformat angka menjadi Rupiah (Rp)
-const formatRupiah = (angka) => {
+// Fungsi untuk format angka menjadi Rupiah (dasar)
+const formatRupiah = (number) => {
     return new Intl.NumberFormat('id-ID', {
         style: 'currency',
         currency: 'IDR',
         minimumFractionDigits: 0
-    }).format(angka);
-}
+    }).format(number);
+};
 
-// Fungsi untuk memperbarui tampilan Saldo Total
-const perbaruiSaldo = () => {
-    // Hitung saldo total
-    const total = transaksi.reduce((acc, item) => (acc += item.jumlah), 0);
-    saldoTotal.textContent = formatRupiah(total);
-    saldoTotal.className = total >= 0 ? 'saldo-total' : 'saldo-total pengeluaran'; // Kasih warna merah jika minus
-}
+// Fungsi untuk merender (menampilkan) tujuan ke DOM
+const renderGoals = () => {
+    goalsContainer.innerHTML = ''; // Kosongkan wadah tujuan
 
-// Fungsi untuk menambahkan transaksi ke DOM
-const tambahTransaksiKeDOM = (transaksiItem) => {
-    // Tentukan apakah itu Pemasukan (hijau) atau Pengeluaran (merah)
-    const kelas = transaksiItem.jumlah < 0 ? 'pengeluaran' : 'pemasukan';
+    if (financialGoals.length === 0) {
+        noGoalsMessage.style.display = 'block';
+        return;
+    } else {
+        noGoalsMessage.style.display = 'none';
+    }
 
-    const item = document.createElement('li');
-    item.classList.add(kelas);
+    financialGoals.forEach(goal => {
+        // Hitung persentase kemajuan
+        const progressPercentage = (goal.currentAmount / goal.targetAmount) * 100;
+        const clampedPercentage = Math.min(100, progressPercentage).toFixed(1); // Batasi maks 100%
 
-    // Dapatkan nilai absolut (tanpa tanda minus) untuk ditampilkan
-    const jumlahText = formatRupiah(Math.abs(transaksiItem.jumlah));
+        // Buat elemen card untuk tujuan
+        const goalCard = document.createElement('div');
+        goalCard.className = 'goal-card';
+        
+        goalCard.innerHTML = `
+            <h3>${goal.name}</h3>
+            
+            <div class="goal-details">
+                <p><strong>Target:</strong> ${formatRupiah(goal.targetAmount)}</p>
+                <p><strong>Telah Terkumpul:</strong> ${formatRupiah(goal.currentAmount)}</p>
+                <p><strong>Persentase:</strong> ${clampedPercentage}%</p>
+            </div>
 
-    item.innerHTML = `
-        <span>${transaksiItem.deskripsi}</span>
-        <span>${jumlahText}</span>
-    `;
+            <div class="progress-bar-container">
+                <div 
+                    class="progress-bar" 
+                    style="width: ${clampedPercentage}%;"
+                    title="${clampedPercentage}% dari target"
+                >
+                    ${clampedPercentage > 10 ? `${clampedPercentage}%` : ''}
+                </div>
+            </div>
+        `;
+        
+        goalsContainer.appendChild(goalCard);
+    });
+};
 
-    listTransaksi.appendChild(item);
-}
+// Event Listener untuk penambahan tujuan baru
+form.addEventListener('submit', (e) => {
+    e.preventDefault(); // Mencegah form submit dan refresh halaman
 
-// Fungsi utama untuk menginisialisasi aplikasi
-const init = () => {
-    listTransaksi.innerHTML = '';
-    // Tambahkan setiap transaksi dari array ke DOM
-    transaksi.forEach(tambahTransaksiKeDOM);
-    perbaruiSaldo();
-}
+    // Ambil nilai dari input
+    const goalName = document.getElementById('goal-name').value.trim();
+    const targetAmount = parseFloat(document.getElementById('target-amount').value);
+    const currentAmount = parseFloat(document.getElementById('current-amount').value);
 
-// Handler untuk pengiriman formulir
-formTransaksi.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const deskripsi = deskripsiInput.value.trim();
-    // Gunakan parseFloat untuk memastikan input adalah angka
-    const jumlah = parseFloat(jumlahInput.value);
-
-    // Validasi sederhana
-    if (deskripsi === '' || isNaN(jumlah) || jumlah === 0) {
-        alert('Mohon masukkan deskripsi dan jumlah yang valid!');
+    // Validasi dasar
+    if (!goalName || targetAmount <= 0 || currentAmount < 0) {
+        alert('Mohon isi semua kolom dengan nilai yang valid.');
         return;
     }
 
-    const transaksiBaru = {
+    // Buat objek tujuan baru
+    const newGoal = {
         id: Date.now(), // ID unik sederhana
-        deskripsi,
-        jumlah
+        name: goalName,
+        targetAmount: targetAmount,
+        currentAmount: currentAmount
     };
 
-    transaksi.push(transaksiBaru);
+    // Tambahkan tujuan ke array
+    financialGoals.push(newGoal);
 
-    // Tambahkan ke tampilan
-    tambahTransaksiKeDOM(transaksiBaru);
-    perbaruiSaldo();
+    // Render ulang daftar tujuan
+    renderGoals();
 
     // Reset formulir
-    deskripsiInput.value = '';
-    jumlahInput.value = '';
+    form.reset();
 });
 
-// Jalankan inisialisasi saat aplikasi dimuat
-init();
+// Panggil renderGoals saat halaman dimuat pertama kali
+document.addEventListener('DOMContentLoaded', renderGoals);
