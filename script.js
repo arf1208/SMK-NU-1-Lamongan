@@ -1,96 +1,99 @@
-// Data Array untuk menyimpan semua tujuan keuangan
-let financialGoals = [];
+document.addEventListener('DOMContentLoaded', () => {
+    const recipesContainer = document.getElementById('recipes-container');
+    const searchInput = document.getElementById('searchInput');
+    const searchButton = document.getElementById('searchButton');
+    const filterButtons = document.querySelectorAll('.filters button');
 
-// Mendapatkan referensi elemen DOM
-const form = document.getElementById('add-goal-form');
-const goalsContainer = document.getElementById('goals-container');
-const noGoalsMessage = document.getElementById('no-goals-message');
+    // Data resep (simulasi data backend)
+    // Dalam proyek nyata, data ini akan diambil dari API/Database
+    const allRecipes = [
+        { name: "Rendang Daging", country: "indonesia", tags: ["asia", "daging", "pedas"], description: "Masakan Asia Tenggara yang kaya rempah.", image: "./assets/images/rendang.jpg" },
+        { name: "Pasta Carbonara", country: "italia", tags: ["europe", "pasta", "telur"], description: "Klasik Roma dengan telur dan keju.", image: "./assets/images/pasta.jpg" },
+        { name: "Sushi Roll", country: "jepang", tags: ["asia", "ikan", "nasi"], description: "Hidangan nasi cuka dengan makanan laut.", image: "./assets/images/sushi.jpg" },
+        { name: "Taco Al Pastor", country: "mexico", tags: ["america", "daging", "tortilla"], description: "Taco khas Meksiko dengan daging babi.", image: "./assets/images/taco.jpg" },
+        { name: "Chicken Tagine", country: "maroko", tags: ["africa", "ayam", "rempah"], description: "Rebusan Maroko yang dimasak dalam periuk tanah liat.", image: "./assets/images/tagine.jpg" },
+        { name: "Beef Stroganoff", country: "rusia", tags: ["europe", "daging", "krim"], description: "Irisan daging sapi dalam saus krim.", image: "./assets/images/stroganoff.jpg" },
+    ];
 
-// Fungsi untuk format angka menjadi Rupiah (dasar)
-const formatRupiah = (number) => {
-    return new Intl.NumberFormat('id-ID', {
-        style: 'currency',
-        currency: 'IDR',
-        minimumFractionDigits: 0
-    }).format(number);
-};
+    /**
+     * Fungsi untuk me-render daftar resep ke HTML
+     * @param {Array<Object>} recipes - Daftar resep yang akan ditampilkan
+     */
+    function renderRecipes(recipes) {
+        recipesContainer.innerHTML = ''; // Kosongkan konten sebelumnya
 
-// Fungsi untuk merender (menampilkan) tujuan ke DOM
-const renderGoals = () => {
-    goalsContainer.innerHTML = ''; // Kosongkan wadah tujuan
+        if (recipes.length === 0) {
+            recipesContainer.innerHTML = '<p style="grid-column: 1 / -1; text-align: center;">Tidak ada resep yang ditemukan.</p>';
+            return;
+        }
 
-    if (financialGoals.length === 0) {
-        noGoalsMessage.style.display = 'block';
-        return;
-    } else {
-        noGoalsMessage.style.display = 'none';
+        recipes.forEach(recipe => {
+            const card = document.createElement('div');
+            card.className = 'recipe-card';
+            card.setAttribute('data-country', recipe.tags[0]); // Menggunakan tag pertama untuk filter negara
+
+            card.innerHTML = `
+                <img src="${recipe.image || './assets/images/placeholder.jpg'}" alt="${recipe.name}">
+                <h3>${recipe.name}</h3>
+                <p>${recipe.country.toUpperCase()} - ${recipe.description}</p>
+                <a href="#">Lihat Resep</a>
+            `;
+            recipesContainer.appendChild(card);
+        });
     }
 
-    financialGoals.forEach(goal => {
-        // Hitung persentase kemajuan
-        const progressPercentage = (goal.currentAmount / goal.targetAmount) * 100;
-        const clampedPercentage = Math.min(100, progressPercentage).toFixed(1); // Batasi maks 100%
+    /**
+     * Fungsi untuk memfilter resep berdasarkan teks pencarian
+     */
+    function filterBySearch() {
+        const query = searchInput.value.toLowerCase();
+        const filteredRecipes = allRecipes.filter(recipe => 
+            recipe.name.toLowerCase().includes(query) || 
+            recipe.country.toLowerCase().includes(query) ||
+            recipe.description.toLowerCase().includes(query)
+        );
+        renderRecipes(filteredRecipes);
+    }
 
-        // Buat elemen card untuk tujuan
-        const goalCard = document.createElement('div');
-        goalCard.className = 'goal-card';
-        
-        goalCard.innerHTML = `
-            <h3>${goal.name}</h3>
-            
-            <div class="goal-details">
-                <p><strong>Target:</strong> ${formatRupiah(goal.targetAmount)}</p>
-                <p><strong>Telah Terkumpul:</strong> ${formatRupiah(goal.currentAmount)}</p>
-                <p><strong>Persentase:</strong> ${clampedPercentage}%</p>
-            </div>
+    /**
+     * Fungsi untuk memfilter resep berdasarkan kategori/benua
+     * @param {string} category - Kategori yang dipilih (misalnya 'asia', 'europe')
+     */
+    function filterByCategory(category) {
+        let filteredRecipes;
+        if (category === 'all') {
+            filteredRecipes = allRecipes;
+        } else {
+            filteredRecipes = allRecipes.filter(recipe => 
+                recipe.tags.includes(category)
+            );
+        }
+        renderRecipes(filteredRecipes);
+    }
 
-            <div class="progress-bar-container">
-                <div 
-                    class="progress-bar" 
-                    style="width: ${clampedPercentage}%;"
-                    title="${clampedPercentage}% dari target"
-                >
-                    ${clampedPercentage > 10 ? `${clampedPercentage}%` : ''}
-                </div>
-            </div>
-        `;
-        
-        goalsContainer.appendChild(goalCard);
+    // EVENT LISTENERS
+
+    // 1. Pencarian
+    searchButton.addEventListener('click', filterBySearch);
+    searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            filterBySearch();
+        }
     });
-};
 
-// Event Listener untuk penambahan tujuan baru
-form.addEventListener('submit', (e) => {
-    e.preventDefault(); // Mencegah form submit dan refresh halaman
+    // 2. Filter Kategori/Benua
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Hapus kelas 'active' dari semua tombol
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            // Tambahkan kelas 'active' ke tombol yang diklik
+            this.classList.add('active');
+            
+            const category = this.getAttribute('data-country');
+            filterByCategory(category);
+        });
+    });
 
-    // Ambil nilai dari input
-    const goalName = document.getElementById('goal-name').value.trim();
-    const targetAmount = parseFloat(document.getElementById('target-amount').value);
-    const currentAmount = parseFloat(document.getElementById('current-amount').value);
-
-    // Validasi dasar
-    if (!goalName || targetAmount <= 0 || currentAmount < 0) {
-        alert('Mohon isi semua kolom dengan nilai yang valid.');
-        return;
-    }
-
-    // Buat objek tujuan baru
-    const newGoal = {
-        id: Date.now(), // ID unik sederhana
-        name: goalName,
-        targetAmount: targetAmount,
-        currentAmount: currentAmount
-    };
-
-    // Tambahkan tujuan ke array
-    financialGoals.push(newGoal);
-
-    // Render ulang daftar tujuan
-    renderGoals();
-
-    // Reset formulir
-    form.reset();
+    // Inisialisasi: Muat semua resep saat pertama kali halaman dimuat
+    renderRecipes(allRecipes);
 });
-
-// Panggil renderGoals saat halaman dimuat pertama kali
-document.addEventListener('DOMContentLoaded', renderGoals);
