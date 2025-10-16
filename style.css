@@ -1,23 +1,24 @@
-/* RESET DASAR */
+/* ROOT VARIABLES untuk konsistensi tema */
+:root {
+    --color-primary: #964B00; /* Cokelat Tua (Warna Rempah) */
+    --color-secondary: #E9543C; /* Merah Cabai */
+    --color-accent: #FFC300; /* Kuning Kunyit */
+    --color-background: #F8F8F8;
+    --color-text: #333333;
+}
+
+/* RESET & FONDASI */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-:root {
-    --color-primary: #8B4513; /* Cokelat Tua (Kopi/Kayu Manis) */
-    --color-secondary: #FF6347; /* Merah Cabai/Terasi */
-    --color-accent: #FFD700; /* Kuning Kunyit */
-    --color-light: #fefefe;
-    --color-dark: #333;
-}
-
 body {
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
-    background-color: var(--color-light);
-    color: var(--color-dark);
+    background-color: var(--color-background);
+    color: var(--color-text);
 }
 
 a {
@@ -29,96 +30,101 @@ a {
 header {
     background-color: var(--color-primary);
     color: white;
-    padding: 1rem 5%;
+    padding: 1.2rem 5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .logo {
-    font-family: 'Georgia', serif;
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: bold;
 }
 
 nav a {
     color: white;
-    margin-left: 20px;
-    padding: 5px 10px;
+    margin-left: 25px;
+    padding: 8px 12px;
+    border-radius: 4px;
     transition: background-color 0.3s;
 }
 
 nav a:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* MAIN CONTENT */
+main {
+    padding: 20px 5%;
 }
 
 /* HERO SECTION */
 .hero {
-    background-color: #38761D; /* Hijau Daun */
+    background: linear-gradient(135deg, var(--color-primary), #A0522D);
     color: white;
     text-align: center;
-    padding: 80px 20px;
-    margin-bottom: 30px;
-    border-radius: 8px;
+    padding: 100px 20px;
+    margin-bottom: 40px;
+    border-radius: 10px;
 }
 
 .hero h1 {
-    font-size: 3rem;
+    font-size: 3.5rem;
     margin-bottom: 10px;
 }
 
 .search-container {
-    margin-top: 25px;
+    margin-top: 30px;
     display: flex;
     justify-content: center;
 }
 
 #searchInput {
-    padding: 12px 15px;
-    width: 60%;
-    max-width: 450px;
+    padding: 14px 18px;
+    width: 70%;
+    max-width: 500px;
     border: none;
-    border-radius: 5px 0 0 5px;
-    font-size: 1rem;
+    border-radius: 8px 0 0 8px;
+    font-size: 1.1rem;
 }
 
 #searchButton {
-    padding: 12px 20px;
+    padding: 14px 25px;
     background-color: var(--color-secondary);
     color: white;
     border: none;
-    border-radius: 0 5px 5px 0;
+    border-radius: 0 8px 8px 0;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 1.1rem;
     transition: background-color 0.3s;
 }
 
 #searchButton:hover {
-    background-color: #E9543C;
+    background-color: #D9442C;
 }
 
 /* FILTER SECTION */
 .recipe-filter h2 {
     text-align: center;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     color: var(--color-primary);
 }
 
 .filters {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap; /* Agar tombol responsif pada layar kecil */
-    gap: 10px;
-    margin-bottom: 30px;
+    flex-wrap: wrap; 
+    gap: 15px;
+    margin-bottom: 40px;
 }
 
 .filters button {
-    padding: 10px 18px;
+    padding: 10px 20px;
     border: 2px solid var(--color-primary);
-    background-color: var(--color-light);
+    background-color: var(--color-background);
     color: var(--color-primary);
-    border-radius: 25px;
+    border-radius: 30px;
     cursor: pointer;
     font-weight: bold;
     transition: all 0.3s;
@@ -126,77 +132,80 @@ nav a:hover {
 
 .filters button:hover, .filters button.active {
     background-color: var(--color-primary);
-    color: var(--color-light);
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* RECIPE LIST (GRID) */
 .recipe-list h2 {
-    margin-bottom: 20px;
-    border-left: 5px solid var(--color-secondary);
-    padding-left: 10px;
-    color: var(--color-dark);
+    margin-bottom: 30px;
+    border-left: 6px solid var(--color-secondary);
+    padding-left: 15px;
+    color: var(--color-text);
 }
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
 }
 
 .recipe-card {
     background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    transition: transform 0.3s;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .recipe-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 }
 
 .recipe-card img {
     width: 100%;
-    height: 220px;
+    height: 250px; /* Cover yang menarik */
     object-fit: cover;
 }
 
 .card-content {
-    padding: 15px;
+    padding: 20px;
 }
 
 .recipe-card h3 {
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     color: var(--color-primary);
+    font-size: 1.5rem;
 }
 
 .recipe-card p {
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: #666;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .recipe-card a {
     display: block;
     text-align: center;
-    padding: 10px;
+    padding: 12px;
     background-color: var(--color-secondary);
     color: white;
-    border-radius: 5px;
+    border-radius: 6px;
     font-weight: bold;
     transition: background-color 0.3s;
 }
 
 .recipe-card a:hover {
-    background-color: #C9302C;
+    background-color: #D9442C;
 }
 
 /* FOOTER */
 footer {
     text-align: center;
-    padding: 20px 0;
+    padding: 25px 0;
     background-color: var(--color-dark);
     color: white;
-    margin-top: 40px;
+    margin-top: 50px;
+    background-color: var(--color-text);
 }
