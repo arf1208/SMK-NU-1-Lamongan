@@ -3,36 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CuanCerdas - Pencatat Keuangan</title>
+    <title>FinGo | Financial Goal Tracker</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>CuanCerdas 💸</h1>
-        <h2>Saldo Saat Ini:</h2>
-        <div id="saldo-total" class="saldo-total">Rp 0</div>
+    <header>
+        <h1>FinGo</h1>
+        <p>Lacak Tujuan Keuangan Anda</p>
+    </header>
 
-        <div class="form-transaksi">
-            <h3>Tambah Transaksi Baru</h3>
-            <form id="form-transaksi">
-                <div>
-                    <label for="deskripsi">Deskripsi:</label>
-                    <input type="text" id="deskripsi" placeholder="Misal: Beli Kopi" required>
+    <main>
+        <section id="goal-input">
+            <h2>Tambah Tujuan Baru</h2>
+            <form id="add-goal-form">
+                <div class="form-group">
+                    <label for="goal-name">Nama Tujuan:</label>
+                    <input type="text" id="goal-name" required>
                 </div>
-                <div>
-                    <label for="jumlah">Jumlah (Nilai Positif untuk Pemasukan, Negatif untuk Pengeluaran):</label>
-                    <input type="number" id="jumlah" placeholder="Misal: 50000 (Pemasukan) atau -15000 (Pengeluaran)" required>
+                <div class="form-group">
+                    <label for="target-amount">Target Jumlah (Rp):</label>
+                    <input type="number" id="target-amount" required min="10000" step="1000">
                 </div>
-                <button type="submit" class="btn">Catat!</button>
+                <div class="form-group">
+                    <label for="current-amount">Telah Terkumpul (Rp):</label>
+                    <input type="number" id="current-amount" required value="0" min="0" step="1000">
+                </div>
+                <button type="submit">Tambahkan Tujuan</button>
             </form>
-        </div>
+        </section>
 
-        <div class="riwayat">
-            <h3>Riwayat Transaksi</h3>
-            <ul id="list-transaksi">
-                </ul>
-        </div>
-    </div>
+        <section id="goal-list-container">
+            <h2>Daftar Tujuan</h2>
+            <div id="goals-container">
+                <p id="no-goals-message">Belum ada tujuan yang ditambahkan.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 FinGo Project. Dibuat dengan ❤️</p>
+    </footer>
 
     <script src="script.js"></script>
 </body>
