@@ -4,39 +4,56 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchButton = document.getElementById('searchButton');
     const filterButtons = document.querySelectorAll('.filters button');
 
-    // Data resep (simulasi data backend)
-    // Dalam proyek nyata, data ini akan diambil dari API/Database
+    // Data resep Indonesia (simulasi)
     const allRecipes = [
-        { name: "Rendang Daging", country: "indonesia", tags: ["asia", "daging", "pedas"], description: "Masakan Asia Tenggara yang kaya rempah.", image: "./assets/images/rendang.jpg" },
-        { name: "Pasta Carbonara", country: "italia", tags: ["europe", "pasta", "telur"], description: "Klasik Roma dengan telur dan keju.", image: "./assets/images/pasta.jpg" },
-        { name: "Sushi Roll", country: "jepang", tags: ["asia", "ikan", "nasi"], description: "Hidangan nasi cuka dengan makanan laut.", image: "./assets/images/sushi.jpg" },
-        { name: "Taco Al Pastor", country: "mexico", tags: ["america", "daging", "tortilla"], description: "Taco khas Meksiko dengan daging babi.", image: "./assets/images/taco.jpg" },
-        { name: "Chicken Tagine", country: "maroko", tags: ["africa", "ayam", "rempah"], description: "Rebusan Maroko yang dimasak dalam periuk tanah liat.", image: "./assets/images/tagine.jpg" },
-        { name: "Beef Stroganoff", country: "rusia", tags: ["europe", "daging", "krim"], description: "Irisan daging sapi dalam saus krim.", image: "./assets/images/stroganoff.jpg" },
+        { name: "Rendang Daging Sapi", region: "sumatera", tags: ["daging", "pedas", "minang"], description: "Masakan khas Minangkabau yang dimasak dengan santan dan rempah.", imageKeyword: "rendang" },
+        { name: "Soto Ayam Lamongan", region: "jawa", tags: ["kuah", "ayam", "jawa-timur"], description: "Sup ayam berkuah kuning dengan koya dan telur.", imageKeyword: "soto-ayam" },
+        { name: "Nasi Goreng Kampung", region: "jawa", tags: ["nasi", "cepat-saji", "pedas"], description: "Hidangan nasi yang digoreng dengan bumbu sederhana dan telur.", imageKeyword: "nasi-goreng" },
+        { name: "Sate Lilit Ikan", region: "bali", tags: ["ikan", "sate", "pedas"], description: "Sate khas Bali dengan daging ikan cincang yang dililitkan.", imageKeyword: "sate-lilit" },
+        { name: "Pempek Kapal Selam", region: "sumatera", tags: ["ikan", "palembang", "kuah-cuko"], description: "Makanan dari ikan dan sagu yang disajikan dengan kuah cuka.", imageKeyword: "pempek" },
+        { name: "Coto Makassar", region: "sulawesi", tags: ["daging", "sup", "makassar"], description: "Sup daging khas Makassar dengan bumbu rempah yang kental.", imageKeyword: "coto-makassar" },
+        { name: "Papeda Kuah Kuning", region: "papua", tags: ["sagu", "ikan", "papua"], description: "Bubur sagu yang disajikan dengan ikan kuah kuning pedas.", imageKeyword: "papeda" },
     ];
 
     /**
+     * Fungsi untuk mendapatkan URL gambar placeholder berdasarkan kata kunci
+     * Menggunakan layanan yang bersifat placeholder/demo
+     * @param {string} keyword - Kata kunci untuk gambar
+     * @returns {string} URL gambar
+     */
+    function getPlaceholderImage(keyword) {
+        // Menggunakan Picsum atau sejenisnya. Di sini saya pakai Placehold.co sebagai demo
+        // Dalam implementasi nyata, ganti dengan aset Anda sendiri
+        const seed = keyword.replace(/\s/g, '-').toLowerCase();
+        // Contoh: Menggunakan URL untuk ilustrasi masakan
+        return `https://source.unsplash.com/random/400x300/?food,indonesian,${seed}`;
+    }
+
+    /**
      * Fungsi untuk me-render daftar resep ke HTML
-     * @param {Array<Object>} recipes - Daftar resep yang akan ditampilkan
      */
     function renderRecipes(recipes) {
-        recipesContainer.innerHTML = ''; // Kosongkan konten sebelumnya
+        recipesContainer.innerHTML = ''; 
 
         if (recipes.length === 0) {
-            recipesContainer.innerHTML = '<p style="grid-column: 1 / -1; text-align: center;">Tidak ada resep yang ditemukan.</p>';
+            recipesContainer.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; color: #666;">Maaf, resep yang Anda cari belum tersedia di Dapur Nusantara.</p>';
             return;
         }
 
         recipes.forEach(recipe => {
             const card = document.createElement('div');
             card.className = 'recipe-card';
-            card.setAttribute('data-country', recipe.tags[0]); // Menggunakan tag pertama untuk filter negara
+            
+            // Dapatkan URL Gambar Otomatis
+            const imageUrl = getPlaceholderImage(recipe.imageKeyword || recipe.name);
 
             card.innerHTML = `
-                <img src="${recipe.image || './assets/images/placeholder.jpg'}" alt="${recipe.name}">
-                <h3>${recipe.name}</h3>
-                <p>${recipe.country.toUpperCase()} - ${recipe.description}</p>
-                <a href="#">Lihat Resep</a>
+                <img src="${imageUrl}" alt="${recipe.name}" loading="lazy" onerror="this.onerror=null;this.src='./assets/images/default.jpg';">
+                <div class="card-content">
+                    <h3>${recipe.name}</h3>
+                    <p>Dari: ${recipe.region.toUpperCase()} - ${recipe.description}</p>
+                    <a href="#">Lihat Resep Lengkap</a>
+                </div>
             `;
             recipesContainer.appendChild(card);
         });
@@ -49,23 +66,23 @@ document.addEventListener('DOMContentLoaded', () => {
         const query = searchInput.value.toLowerCase();
         const filteredRecipes = allRecipes.filter(recipe => 
             recipe.name.toLowerCase().includes(query) || 
-            recipe.country.toLowerCase().includes(query) ||
-            recipe.description.toLowerCase().includes(query)
+            recipe.region.toLowerCase().includes(query) ||
+            recipe.description.toLowerCase().includes(query) ||
+            recipe.tags.some(tag => tag.includes(query))
         );
         renderRecipes(filteredRecipes);
     }
 
     /**
-     * Fungsi untuk memfilter resep berdasarkan kategori/benua
-     * @param {string} category - Kategori yang dipilih (misalnya 'asia', 'europe')
+     * Fungsi untuk memfilter resep berdasarkan kategori/wilayah
      */
-    function filterByCategory(category) {
+    function filterByRegion(region) {
         let filteredRecipes;
-        if (category === 'all') {
+        if (region === 'all') {
             filteredRecipes = allRecipes;
         } else {
             filteredRecipes = allRecipes.filter(recipe => 
-                recipe.tags.includes(category)
+                recipe.region === region
             );
         }
         renderRecipes(filteredRecipes);
@@ -81,16 +98,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 2. Filter Kategori/Benua
+    // 2. Filter Kategori/Wilayah
     filterButtons.forEach(button => {
         button.addEventListener('click', function() {
-            // Hapus kelas 'active' dari semua tombol
+            // Atur kelas 'active' pada tombol
             filterButtons.forEach(btn => btn.classList.remove('active'));
-            // Tambahkan kelas 'active' ke tombol yang diklik
             this.classList.add('active');
             
-            const category = this.getAttribute('data-country');
-            filterByCategory(category);
+            const region = this.getAttribute('data-region');
+            filterByRegion(region);
         });
     });
 
