@@ -8,64 +8,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Culinary Atlas | Resep Dunia</title>
+    <title>Dapur Nusantara | Resep Indonesia</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header>
-        <div class="logo">TheCulinaryAtlas</div>
+        <div class="logo">DapurNusantara</div>
         <nav>
             <a href="#">Beranda</a>
-            <a href="#">Jelajahi</a>
-            <a href="#">Tentang</a>
+            <a href="#">Provinsi</a>
+            <a href="#">Tentang Kami</a>
         </nav>
     </header>
 
     <main>
         <section class="hero">
-            <h1>Jelajahi Dapur Dunia</h1>
-            <p>Ribuan resep otentik dari seluruh penjuru bumi menanti Anda.</p>
+            <h1>Jelajahi Rasa Indonesia</h1>
+            <p>Resep Otentik dari Sabang sampai Merauke.</p>
             <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Cari resep (mis: Rendang, Ramen, Pasta)...">
+                <input type="text" id="searchInput" placeholder="Cari resep (mis: Soto, Rendang, Klepon)...">
                 <button id="searchButton"><i class="fas fa-search"></i> Cari</button>
             </div>
         </section>
 
         <section class="recipe-filter">
-            <h2>Filter Cepat</h2>
+            <h2>Pilih Berdasarkan Wilayah</h2>
             <div class="filters">
-                <button data-country="asia">Asia</button>
-                <button data-country="europe">Eropa</button>
-                <button data-country="america">Amerika</button>
-                <button data-country="africa">Afrika</button>
-                <button data-country="all" class="active">Semua</button>
+                <button data-region="sumatera">Sumatera</button>
+                <button data-region="jawa">Jawa</button>
+                <button data-region="kalimantan">Kalimantan</button>
+                <button data-region="bali">Bali & Nusa Tenggara</button>
+                <button data-region="sulawesi">Sulawesi</button>
+                <button data-region="papua">Maluku & Papua</button>
+                <button data-region="all" class="active">Semua</button>
             </div>
         </section>
 
         <section class="recipe-list">
-            <h2>Resep Populer Global</h2>
+            <h2>Resep Pilihan Nusantara</h2>
             <div id="recipes-container" class="grid-container">
-                <div class="recipe-card" data-country="asia">
-                    <img src="./assets/images/rendang.jpg" alt="Rendang">
-                    <h3>Rendang Daging</h3>
-                    <p>Indonesia - Masakan Asia Tenggara yang kaya rempah.</p>
-                    <a href="#">Lihat Resep</a>
-                </div>
-                
-                <div class="recipe-card" data-country="europe">
-                    <img src="./assets/images/pasta.jpg" alt="Pasta Carbonara">
-                    <h3>Pasta Carbonara</h3>
-                    <p>Italia - Klasik Roma dengan telur dan keju.</p>
-                    <a href="#">Lihat Resep</a>
-                </div>
-                
                 </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 The Culinary Atlas. Semua Hak Cipta Dilindungi.</p>
+        <p>&copy; 2024 Dapur Nusantara. Warisan Kuliner Indonesia.</p>
     </footer>
 
     <script src="script.js"></script>
