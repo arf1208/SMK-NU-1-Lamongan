@@ -1,59 +1,54 @@
----
-
-## 4. `index.html` (Kerangka Halaman Utama)
-
-```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dapur Nusantara | Resep Indonesia</title>
+    <title>RempahRasa | Jejak Rasa Nusantara</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header>
-        <div class="logo">DapurNusantara</div>
+        <div class="logo">🌶️ RempahRasa</div>
         <nav>
-            <a href="#">Beranda</a>
-            <a href="#">Provinsi</a>
-            <a href="#">Tentang Kami</a>
+            <a href="#home">Beranda</a>
+            <a href="#jelajah">Jelajah Resep</a>
+            <a href="#tentang">Tentang</a>
         </nav>
     </header>
 
     <main>
-        <section class="hero">
-            <h1>Jelajahi Rasa Indonesia</h1>
-            <p>Resep Otentik dari Sabang sampai Merauke.</p>
+        <section class="hero" id="home">
+            <h1>Jejak Rasa Nusantara</h1>
+            <p>Koleksi Resep Indonesia Otentik dari Sabang hingga Merauke.</p>
             <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Cari resep (mis: Soto, Rendang, Klepon)...">
+                <input type="text" id="searchInput" placeholder="Cari resep (mis: Gudeg, Coto, Sate Maranggi)...">
                 <button id="searchButton"><i class="fas fa-search"></i> Cari</button>
             </div>
         </section>
 
-        <section class="recipe-filter">
-            <h2>Pilih Berdasarkan Wilayah</h2>
+        <section class="recipe-filter" id="jelajah">
+            <h2>Filter Berdasarkan Wilayah</h2>
             <div class="filters">
                 <button data-region="sumatera">Sumatera</button>
-                <button data-region="jawa">Jawa</button>
-                <button data-region="kalimantan">Kalimantan</button>
+                <button data-region="jawa" class="active">Jawa</button>
                 <button data-region="bali">Bali & Nusa Tenggara</button>
+                <button data-region="kalimantan">Kalimantan</button>
                 <button data-region="sulawesi">Sulawesi</button>
-                <button data-region="papua">Maluku & Papua</button>
-                <button data-region="all" class="active">Semua</button>
+                <button data-region="timur">Maluku & Papua</button>
+                <button data-region="all">Semua</button>
             </div>
         </section>
 
         <section class="recipe-list">
-            <h2>Resep Pilihan Nusantara</h2>
+            <h2>Resep Pilihan</h2>
             <div id="recipes-container" class="grid-container">
                 </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 Dapur Nusantara. Warisan Kuliner Indonesia.</p>
+        <p>&copy; 2024 RempahRasa. Warisan Kuliner Indonesia.</p>
     </footer>
 
     <script src="script.js"></script>
