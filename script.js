@@ -171,6 +171,7 @@ function generateReceipt() {
     let receiptHTML = `
         <p style="text-align: center;">-------------------------</p>
         <p style="text-align: center;">Cashier Warteg SKANULA</p>
+        <p style="text-align: center;">Jl. Veteran NO. 55A, Jetis, Lamongan</p>
         <p style="text-align: center;">Tgl: ${new Date().toLocaleDateString('id-ID')}</p>
         <p style="text-align: center;">-------------------------</p>
         <p><strong>ITEM PESANAN</strong></p>
