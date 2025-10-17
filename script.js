@@ -3,17 +3,10 @@ const PRODUCTS = [
     { id: 1, name: "Tempe Orek", price: 8000 },
     { id: 2, name: "Ayam Goreng", price: 10000 },
     { id: 3, name: "Ikan Goreng", price: 10000 },
-    { id: 4, name: "Telur Balado", price: 8000 },
-    { id: 5, name: "Tumis Kangkung", price: 7000 },
-    { id: 6, name: "Sayur Lodeh", price: 7000 }
-    { id: 7, name: "Bakwan", price: 2000 }
-    { id: 8, name: "Perkedel", price: 2000 }
-    { id: 9, name: "Kentang Balado", price: 6000 }
-    { id: 9, name: "Cumi Balado", price: 12000 }
-    { id: 9, name: "Kopi Hitam", price: 5000 }
-    { id: 9, name: "Teh Hangat", price: 4000 }
-    { id: 9, name: "Es Teh", price: 4000 }
-    { id: 10, name: "Air Mineral", price: 3000 }
+    { id: 9, name: "Kopi Hitam", price: 5000 },
+    { id: 9, name: "Teh Hangat", price: 4000 },
+    { id: 9, name: "Es Teh", price: 4000 },
+    { id: 10, name: "Air Mineral", price: 3000 },
 ];
 
 let cart = []; // Keranjang belanja
