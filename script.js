@@ -1,12 +1,14 @@
-// --- Data Produk (Inventori) ---
+// --- Data Produk (Inventori) - ID Telah Diperbaiki ---
 const PRODUCTS = [
     { id: 1, name: "Tempe Orek", price: 8000 },
     { id: 2, name: "Ayam Goreng", price: 10000 },
     { id: 3, name: "Ikan Goreng", price: 10000 },
-    { id: 9, name: "Kopi Hitam", price: 5000 },
-    { id: 9, name: "Teh Hangat", price: 4000 },
-    { id: 9, name: "Es Teh", price: 4000 },
-    { id: 10, name: "Air Mineral", price: 3000 },
+    // ID 4, 5, 6, 7, 8 ditambahkan agar unik
+    { id: 4, name: "Nasi Putih", price: 5000 }, // Tambahan, karena nasi adalah dasar!
+    { id: 5, name: "Kopi Hitam", price: 5000 }, 
+    { id: 6, name: "Teh Hangat", price: 4000 },
+    { id: 7, name: "Es Teh", price: 4000 },
+    { id: 8, name: "Air Mineral", price: 3000 },
 ];
 
 let cart = []; // Keranjang belanja
@@ -37,11 +39,19 @@ document.addEventListener('DOMContentLoaded', () => {
             <p>${product.name}</p>
             <span>${formatRupiah(product.price)}</span>
         `;
+        // Memastikan product.id digunakan sebagai argumen untuk addToCart
         card.onclick = () => addToCart(product.id);
         productGrid.appendChild(card);
     });
 
     renderCart();
+    
+    // Memastikan fungsi modal tersedia secara global
+    window.closeModal = closeModal;
+    window.printReceipt = printReceipt;
+    window.checkout = checkout;
+    window.clearCart = clearCart;
+    window.changeQty = changeQty;
 });
 
 // 2. Fungsi Menambah Produk ke Keranjang
@@ -50,6 +60,7 @@ function addToCart(productId) {
 
     if (!product) return;
 
+    // Item di keranjang diidentifikasi menggunakan ID unik produk
     const existingItem = cart.find(item => item.id === productId);
 
     if (existingItem) {
@@ -96,6 +107,7 @@ function renderCart() {
             <small>${formatRupiah(item.price)}</small>
         `;
 
+        // Menggunakan item.id untuk memanggil changeQty
         row.insertCell().innerHTML = `
             <span class="qty-modifier" onclick="changeQty(${item.id}, -1)">-</span>
             ${item.qty}
@@ -144,11 +156,14 @@ function checkout() {
         return;
     }
     
+    // Salin data keranjang saat ini sebelum di-reset
+    window.itemsToPrint = JSON.parse(JSON.stringify(cart)); 
+    
     // Tampilkan Struk
     generateReceipt();
     document.getElementById('receiptModal').style.display = 'block';
     
-    // FIX LOGIC: Reset keranjang setelah data struk disiapkan dan modal tampil
+    // Reset keranjang setelah data struk disiapkan
     cart = [];
     renderCart(); 
 }
@@ -157,9 +172,6 @@ function checkout() {
 function generateReceipt() {
     const content = document.getElementById('receiptContent');
     const totals = window.currentTotals;
-    
-    // Buat salinan keranjang sebelum di-reset di checkout
-    const itemsToPrint = JSON.parse(JSON.stringify(cart));
     
     let receiptHTML = `
         <p style="text-align: center;">-------------------------</p>
@@ -172,7 +184,8 @@ function generateReceipt() {
         <div style="border-bottom: 1px dashed #333; padding-bottom: 5px; margin-bottom: 5px;">
     `;
 
-    itemsToPrint.forEach(item => {
+    // Menggunakan window.itemsToPrint yang sudah disalin di checkout()
+    window.itemsToPrint.forEach(item => {
         receiptHTML += `
             <div class="receipt-item">
                 <span>${item.name} (${item.qty}x)</span>
@@ -216,7 +229,12 @@ function printReceipt() {
     printWindow.document.write(content);
     printWindow.document.write('</body></html>');
     printWindow.document.close();
-    printWindow.print();
+    
+    // Jeda sebentar sebelum mencetak untuk memastikan konten dimuat
+    setTimeout(() => {
+        printWindow.print();
+        printWindow.close();
+    }, 300);
     
     closeModal();
 }
