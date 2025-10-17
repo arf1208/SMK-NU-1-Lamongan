@@ -1,11 +1,19 @@
 // --- Data Produk (Inventori) ---
 const PRODUCTS = [
-    { id: 1, name: "Nasi Goreng", price: 15000 },
-    { id: 2, name: "Mie Ayam", price: 12000 },
-    { id: 3, name: "Kopi Susu", price: 8000 },
-    { id: 4, name: "Es Teh Manis", price: 5000 },
-    { id: 5, name: "Roti Bakar", price: 10000 },
-    { id: 6, name: "Air Mineral", price: 3000 }
+    { id: 1, name: "Tempe Orek", price: 8000 },
+    { id: 2, name: "Ayam Goreng", price: 10000 },
+    { id: 3, name: "Ikan Goreng", price: 10000 },
+    { id: 4, name: "Telur Balado", price: 8000 },
+    { id: 5, name: "Tumis Kangkung", price: 7000 },
+    { id: 6, name: "Sayur Lodeh", price: 7000 }
+    { id: 7, name: "Bakwan", price: 2000 }
+    { id: 8, name: "Perkedel", price: 2000 }
+    { id: 9, name: "Kentang Balado", price: 6000 }
+    { id: 9, name: "Cumi Balado", price: 12000 }
+    { id: 9, name: "Kopi Hitam", price: 5000 }
+    { id: 9, name: "Teh Hangat", price: 4000 }
+    { id: 9, name: "Es Teh", price: 4000 }
+    { id: 10, name: "Air Mineral", price: 3000 }
 ];
 
 let cart = []; // Keranjang belanja
@@ -139,7 +147,7 @@ function calculateTotals(subTotal) {
 // 6. Fungsi Checkout (Menampilkan Struk dan Reset)
 function checkout() {
     if (cart.length === 0) {
-        alert("Keranjang belanja masih kosong!");
+        alert("Total pesanan masih kosong!");
         return;
     }
     
@@ -162,10 +170,10 @@ function generateReceipt() {
     
     let receiptHTML = `
         <p style="text-align: center;">-------------------------</p>
-        <p style="text-align: center;">JS-Cashier Toko Sederhana</p>
+        <p style="text-align: center;">Cashier Warteg SKANULA</p>
         <p style="text-align: center;">Tgl: ${new Date().toLocaleDateString('id-ID')}</p>
         <p style="text-align: center;">-------------------------</p>
-        <p><strong>ITEM BELANJA</strong></p>
+        <p><strong>ITEM PESANAN</strong></p>
         
         <div style="border-bottom: 1px dashed #333; padding-bottom: 5px; margin-bottom: 5px;">
     `;
