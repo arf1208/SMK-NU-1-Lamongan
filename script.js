@@ -1,118 +1,228 @@
+// --- Data Produk (Inventori) ---
+const PRODUCTS = [
+    { id: 1, name: "Nasi Goreng", price: 15000 },
+    { id: 2, name: "Mie Ayam", price: 12000 },
+    { id: 3, name: "Kopi Susu", price: 8000 },
+    { id: 4, name: "Es Teh Manis", price: 5000 },
+    { id: 5, name: "Roti Bakar", price: 10000 },
+    { id: 6, name: "Air Mineral", price: 3000 }
+];
+
+let cart = []; // Keranjang belanja
+const TAX_RATE = 0.11; // 11% PPN
+const DISCOUNT_RATE = 0.10; // 10% Diskon (Contoh: untuk pembelian di atas Rp 50.000)
+
+// Global variable untuk menyimpan total transaksi saat ini
+window.currentTotals = {};
+
+// Fungsi utilitas untuk memformat angka menjadi Rupiah
+function formatRupiah(number) {
+    const num = number || 0; 
+    return new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR',
+        minimumFractionDigits: 0
+    }).format(num);
+}
+
+// 1. Inisialisasi: Menggambar Kartu Produk
 document.addEventListener('DOMContentLoaded', () => {
-    const recipesContainer = document.getElementById('recipes-container');
-    const searchInput = document.getElementById('searchInput');
-    const searchButton = document.getElementById('searchButton');
-    const filterButtons = document.querySelectorAll('.filters button');
-
-    // Data resep Indonesia (simulasi data backend)
-    // Dalam proyek nyata, data ini diambil dari API atau JSON file besar
-    const allRecipes = [
-        { name: "Rendang Daging Sapi", region: "sumatera", tags: ["daging", "pedas", "minang"], description: "Raja masakan Indonesia, kaya santan dan rempah.", imageKeyword: "rendang" },
-        { name: "Gudeg Jogja", region: "jawa", tags: ["nangka", "manis", "jawa-tengah"], description: "Nangka muda dimasak santan dengan rasa manis legit.", imageKeyword: "gudeg" },
-        { name: "Soto Betawi", region: "jawa", tags: ["kuah", "santan", "daging"], description: "Soto khas Jakarta dengan kuah susu atau santan kental.", imageKeyword: "soto-betawi" },
-        { name: "Ayam Betutu", region: "bali", tags: ["ayam", "pedas", "panggang"], description: "Ayam utuh berisi bumbu pedas khas Bali, dipanggang.", imageKeyword: "ayam-betutu" },
-        { name: "Coto Makassar", region: "sulawesi", tags: ["daging", "sup", "makassar"], description: "Sup daging berkaldu kental dan rempah khas Makassar.", imageKeyword: "coto-makassar" },
-        { name: "Nasi Liwet Solo", region: "jawa", tags: ["nasi", "santan", "solo"], description: "Nasi gurih dimasak santan, disajikan dengan lauk pauk.", imageKeyword: "nasi-liwet" },
-        { name: "Papeda Ikan Kuah Kuning", region: "timur", tags: ["sagu", "ikan", "papua"], description: "Bubur sagu lengket disajikan dengan ikan kakap kuah kunyit pedas.", imageKeyword: "papeda" },
-        { name: "Sate Lilit Ikan Laut", region: "bali", tags: ["sate", "ikan", "seafood"], description: "Daging ikan cincang yang dililitkan pada batang serai.", imageKeyword: "sate-lilit" },
-        { name: "Sayur Asem", region: "jawa", tags: ["sayur", "kuah", "segar"], description: "Sayur berkuah asam manis dengan kacang panjang dan melinjo.", imageKeyword: "sayur-asem" }
-    ];
-
-    /**
-     * Mendapatkan URL gambar placeholder otomatis dari Unsplash
-     * @param {string} keyword - Kata kunci untuk pencarian gambar
-     * @returns {string} URL gambar Unsplash
-     */
-    function getPlaceholderImage(keyword) {
-        // Membersihkan dan menggabungkan kata kunci untuk URL yang valid
-        const seed = keyword.replace(/\s/g, '-').toLowerCase();
-        
-        // Menggunakan Unsplash API untuk mendapatkan gambar acak berdasarkan keyword
-        return `https://source.unsplash.com/random/400x300/?indonesian-food,${seed}`;
-    }
-
-    /**
-     * Fungsi untuk me-render (menggambarkan) daftar resep ke HTML
-     */
-    function renderRecipes(recipes) {
-        recipesContainer.innerHTML = ''; // Kosongkan konten sebelumnya
-
-        if (recipes.length === 0) {
-            recipesContainer.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; color: #666; font-size: 1.2rem;">Maaf, tidak ada resep yang sesuai di RempahRasa.</p>';
-            return;
-        }
-
-        recipes.forEach(recipe => {
-            const card = document.createElement('div');
-            card.className = 'recipe-card';
-            
-            const imageUrl = getPlaceholderImage(recipe.imageKeyword || recipe.name);
-
-            card.innerHTML = `
-                <img src="${imageUrl}" 
-                     alt="${recipe.name}" 
-                     loading="lazy" 
-                     onerror="this.onerror=null;this.src='./assets/images/default.jpg';"> 
-                <div class="card-content">
-                    <h3>${recipe.name}</h3>
-                    <p>Daerah Asal: **${recipe.region.toUpperCase()}** - ${recipe.description}</p>
-                    <a href="#">Lihat Resep Lengkap</a>
-                </div>
-            `;
-            recipesContainer.appendChild(card);
-        });
-    }
-
-    /**
-     * Fungsi untuk memfilter resep berdasarkan teks pencarian
-     */
-    function filterBySearch() {
-        const query = searchInput.value.toLowerCase();
-        const filteredRecipes = allRecipes.filter(recipe => 
-            recipe.name.toLowerCase().includes(query) || 
-            recipe.region.toLowerCase().includes(query) ||
-            recipe.tags.some(tag => tag.includes(query))
-        );
-        renderRecipes(filteredRecipes);
-    }
-
-    /**
-     * Fungsi untuk memfilter resep berdasarkan kategori/wilayah
-     */
-    function filterByRegion(region) {
-        let filteredRecipes;
-        if (region === 'all') {
-            filteredRecipes = allRecipes;
-        } else {
-            filteredRecipes = allRecipes.filter(recipe => 
-                recipe.region === region
-            );
-        }
-        renderRecipes(filteredRecipes);
-    }
-
-    // --- EVENT LISTENERS ---
-
-    // 1. Pencarian
-    searchButton.addEventListener('click', filterBySearch);
-    searchInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            filterBySearch();
-        }
+    const productGrid = document.getElementById('productGrid');
+    
+    PRODUCTS.forEach(product => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `
+            <p>${product.name}</p>
+            <span>${formatRupiah(product.price)}</span>
+        `;
+        card.onclick = () => addToCart(product.id);
+        productGrid.appendChild(card);
     });
 
-    // 2. Filter Kategori/Wilayah
-    filterButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            // Atur kelas 'active' pada tombol
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
-            
-            const region = this.getAttribute('data-region');
-            filterByRegion(region);
-        });
-    });
-
-    // Inisialisasi: Tampilkan resep dari wilayah Jawa saat pertama kali dimuat
-    filterByRegion('jawa');
+    renderCart();
 });
+
+// 2. Fungsi Menambah Produk ke Keranjang
+function addToCart(productId) {
+    const product = PRODUCTS.find(p => p.id === productId);
+
+    if (!product) return;
+
+    const existingItem = cart.find(item => item.id === productId);
+
+    if (existingItem) {
+        existingItem.qty += 1;
+    } else {
+        cart.push({
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            qty: 1
+        });
+    }
+    renderCart();
+}
+
+// 3. Fungsi untuk Mengubah Kuantitas Item
+function changeQty(itemId, delta) {
+    const item = cart.find(i => i.id === itemId);
+    if (!item) return;
+
+    item.qty += delta;
+
+    if (item.qty <= 0) {
+        cart = cart.filter(i => i.id !== itemId);
+    }
+    renderCart();
+}
+
+
+// 4. Fungsi untuk Menggambar Ulang Daftar Keranjang dan Menghitung Total
+function renderCart() {
+    const cartBody = document.getElementById('cartBody');
+    cartBody.innerHTML = ''; 
+
+    let totalSubTotal = 0;
+
+    cart.forEach(item => {
+        const row = cartBody.insertRow();
+        const itemSubtotal = item.price * item.qty;
+        totalSubTotal += itemSubtotal;
+
+        row.insertCell().innerHTML = `
+            <strong>${item.name}</strong><br>
+            <small>${formatRupiah(item.price)}</small>
+        `;
+
+        row.insertCell().innerHTML = `
+            <span class="qty-modifier" onclick="changeQty(${item.id}, -1)">-</span>
+            ${item.qty}
+            <span class="qty-modifier" onclick="changeQty(${item.id}, 1)">+</span>
+        `;
+        row.cells[1].className = 'qty-col';
+
+        row.insertCell().textContent = formatRupiah(itemSubtotal);
+    });
+
+    calculateTotals(totalSubTotal);
+}
+
+// 5. Fungsi untuk Menghitung dan Memperbarui Ringkasan Total
+function calculateTotals(subTotal) {
+    let discountAmount = 0;
+    
+    // Logika Diskon: Diskon 10% jika Subtotal di atas Rp 50.000
+    if (subTotal >= 50000) {
+        discountAmount = subTotal * DISCOUNT_RATE;
+    }
+
+    const subTotalAfterDiscount = subTotal - discountAmount;
+    const taxAmount = subTotalAfterDiscount * TAX_RATE; 
+    const finalTotal = subTotalAfterDiscount + taxAmount;
+
+    // Perbarui Tampilan Ringkasan
+    document.getElementById('subTotal').textContent = formatRupiah(subTotal);
+    document.getElementById('discount').textContent = formatRupiah(discountAmount);
+    document.getElementById('tax').textContent = formatRupiah(taxAmount);
+    document.getElementById('finalTotal').textContent = formatRupiah(finalTotal);
+    
+    // Simpan Total dalam variabel global
+    window.currentTotals = {
+        subTotal,
+        discountAmount,
+        taxAmount,
+        finalTotal
+    };
+}
+
+// 6. Fungsi Checkout (Menampilkan Struk dan Reset)
+function checkout() {
+    if (cart.length === 0) {
+        alert("Keranjang belanja masih kosong!");
+        return;
+    }
+    
+    // Tampilkan Struk
+    generateReceipt();
+    document.getElementById('receiptModal').style.display = 'block';
+    
+    // FIX LOGIC: Reset keranjang setelah data struk disiapkan dan modal tampil
+    cart = [];
+    renderCart(); 
+}
+
+// 7. Fungsi untuk Menghasilkan Struk Pembelian
+function generateReceipt() {
+    const content = document.getElementById('receiptContent');
+    const totals = window.currentTotals;
+    
+    // Buat salinan keranjang sebelum di-reset di checkout
+    const itemsToPrint = JSON.parse(JSON.stringify(cart));
+    
+    let receiptHTML = `
+        <p style="text-align: center;">-------------------------</p>
+        <p style="text-align: center;">JS-Cashier Toko Sederhana</p>
+        <p style="text-align: center;">Tgl: ${new Date().toLocaleDateString('id-ID')}</p>
+        <p style="text-align: center;">-------------------------</p>
+        <p><strong>ITEM BELANJA</strong></p>
+        
+        <div style="border-bottom: 1px dashed #333; padding-bottom: 5px; margin-bottom: 5px;">
+    `;
+
+    itemsToPrint.forEach(item => {
+        receiptHTML += `
+            <div class="receipt-item">
+                <span>${item.name} (${item.qty}x)</span>
+                <span>${formatRupiah(item.price * item.qty)}</span>
+            </div>
+        `;
+    });
+    
+    receiptHTML += `
+        </div>
+        
+        <div style="margin-top: 10px;">
+            <div class="receipt-item"><span>Subtotal:</span><span>${formatRupiah(totals.subTotal)}</span></div>
+            <div class="receipt-item"><span>Diskon (10%):</span><span>-${formatRupiah(totals.discountAmount)}</span></div>
+            <div class="receipt-item"><span>Pajak (11%):</span><span>+${formatRupiah(totals.taxAmount)}</span></div>
+            <div class="receipt-item" style="font-size: 1.1em; font-weight: bold; border-top: 1px dashed #333; padding-top: 5px;">
+                <span>TOTAL:</span>
+                <span>${formatRupiah(totals.finalTotal)}</span>
+            </div>
+        </div>
+        
+        <p style="text-align: center; margin-top: 20px;">** TERIMA KASIH **</p>
+    `;
+    
+    content.innerHTML = receiptHTML;
+}
+
+// 8. Fungsi untuk Menutup Modal Struk
+function closeModal() {
+    document.getElementById('receiptModal').style.display = 'none';
+}
+
+// 9. Fungsi untuk Mencetak Struk (Simulasi Cetak Browser)
+function printReceipt() {
+    const content = document.getElementById('receiptContent').innerHTML;
+    const printWindow = window.open('', '', 'height=600,width=400');
+    
+    printWindow.document.write('<html><head><title>Struk Pembelian</title>');
+    printWindow.document.write('<style>body { font-family: monospace; font-size: 12px; } .receipt-item { display: flex; justify-content: space-between; } h2, p { text-align: center; margin: 5px 0; } </style>');
+    printWindow.document.write('</head><body>');
+    printWindow.document.write(content);
+    printWindow.document.write('</body></html>');
+    printWindow.document.close();
+    printWindow.print();
+    
+    closeModal();
+}
+
+// 10. Fungsi untuk Membersihkan Keranjang
+function clearCart() {
+    if (confirm("Yakin ingin mengosongkan keranjang belanja?")) {
+        cart = [];
+        renderCart();
+    }
+}
