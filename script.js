@@ -1,14 +1,16 @@
-// --- Data Produk (Inventori) - ID Telah Diperbaiki ---
+// --- Data Produk (Inventori) 
 const PRODUCTS = [
-    { id: 1, name: "Tempe Orek", price: 8000 },
+    { id: 1, name: "Tempe Goreng", price: 8000 },
     { id: 2, name: "Ayam Goreng", price: 10000 },
-    { id: 3, name: "Ikan Goreng", price: 10000 },
-    // ID 4, 5, 6, 7, 8 ditambahkan agar unik
-    { id: 4, name: "Nasi Putih", price: 5000 }, // Tambahan, karena nasi adalah dasar!
-    { id: 5, name: "Kopi Hitam", price: 5000 }, 
-    { id: 6, name: "Teh Hangat", price: 4000 },
-    { id: 7, name: "Es Teh", price: 4000 },
-    { id: 8, name: "Air Mineral", price: 3000 },
+    { id: 3, name: "Bebek Goreng", price: 12000 },
+    { id: 4, name: "Lele Goreng", price: 10000 },
+    { id: 5, name: "Telur Dadar", price: 7000},
+    { id: 6, name: "Lalapan", price: 5000},
+    { id: 7, name: "Nasi Putih", price: 5000 }, 
+    { id: 8, name: "Kopi Hitam", price: 5000 }, 
+    { id: 9, name: "Teh Hangat", price: 4000 },
+    { id: 10, name: "Es Teh", price: 4000 },
+    { id: 11, name: "Air Mineral", price: 3000 },
 ];
 
 let cart = []; // Keranjang belanja
@@ -175,7 +177,7 @@ function generateReceipt() {
     
     let receiptHTML = `
         <p style="text-align: center;">-------------------------</p>
-        <p style="text-align: center;">Cashier Warteg SKANULA</p>
+        <p style="text-align: center;">Cashier Pecel Lele</p>
         <p style="text-align: center;">Jl. Veteran NO. 55A, Jetis, Lamongan</p>
         <p style="text-align: center;">Tgl: ${new Date().toLocaleDateString('id-ID')}</p>
         <p style="text-align: center;">-------------------------</p>
@@ -207,7 +209,7 @@ function generateReceipt() {
             </div>
         </div>
         
-        <p style="text-align: center; margin-top: 20px;">** TERIMA KASIH **</p>
+        <p style="text-align: center; margin-top: 20px;">** TERIMA KASIH TELAH BERKUNJUNG **</p>
     `;
     
     content.innerHTML = receiptHTML;
@@ -241,7 +243,7 @@ function printReceipt() {
 
 // 10. Fungsi untuk Membersihkan Keranjang
 function clearCart() {
-    if (confirm("Yakin ingin mengosongkan keranjang belanja?")) {
+    if (confirm("Yakin ingin mengosongkan pesanan?")) {
         cart = [];
         renderCart();
     }
