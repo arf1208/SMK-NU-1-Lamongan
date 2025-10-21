@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Absensi Barcode</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/quagga@0.12.1/dist/quagga.min.js"></script>
+</head>
+<body>
+
+    <div class="absensi-container">
+        <h1>Absensi Kehadiran Sekolah</h1>
+        <h2>Pilih Mode Absensi</h2>
+
+        <div class="mode-selector">
+            <button id="modeStudent" class="mode-btn active" data-mode="SISWA">Siswa</button>
+            <button id="modeTeacher" class="mode-btn" data-mode="GURU">Guru</button>
+        </div>
+
+        <h3>Mode Aktif: <span id="currentMode">SISWA</span></h3>
+        
+        <div id="scanner-container">
+            <div id="interactive" class="viewport">
+                </div>
+        </div>
+
+        <div class="result-section">
+            <p>ID Terpindai: <span id="barcode-result">Menunggu pemindaian...</span></p>
+            
+            <div id="statusMessage" class="status-message"></div>
+        </div>
+
+        <div class="log-section">
+            <h3>Log Kehadiran Hari Ini</h3>
+            <table id="attendanceTable">
+                <thead>
+                    <tr><th>Waktu</th><th>ID/Nama</th><th>Status</th><th>Tipe</th></tr>
+                </thead>
+                <tbody id="attendanceBody">
+                    </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
