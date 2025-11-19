@@ -177,7 +177,7 @@ function generateReceipt() {
     
     let receiptHTML = `
         <p style="text-align: center;">-------------------------</p>
-        <p style="text-align: center;">Cashier Pecel Lele</p>
+        <p style="text-align: center;">Cashier Pecel Lele Persela</p>
         <p style="text-align: center;">Jl. Veteran NO. 55A, Jetis, Lamongan</p>
         <p style="text-align: center;">Tgl: ${new Date().toLocaleDateString('id-ID')}</p>
         <p style="text-align: center;">-------------------------</p>
@@ -243,7 +243,7 @@ function printReceipt() {
 
 // 10. Fungsi untuk Membersihkan Keranjang
 function clearCart() {
-    if (confirm("Yakin ingin mengosongkan pesanan?")) {
+    if (confirm("Yakin anda ingin mengosongkan pesanan?")) {
         cart = [];
         renderCart();
     }
