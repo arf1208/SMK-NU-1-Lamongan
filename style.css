@@ -1,6 +1,9 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #e9ecef;
+    /* --- PERUBAHAN DI SINI --- */
+    background-color: #343a40; /* Contoh Dark Grey */
+    /* background-color: #2c3e50; <--- Anda bisa menggunakan ini juga */
+    /* -------------------------- */
     margin: 0;
     padding: 20px;
 }
@@ -9,8 +12,9 @@ body {
     display: flex;
     max-width: 1200px;
     margin: 0 auto;
-    background: #fff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    /* Ubah warna kontainer utama agar tetap menonjol di latar belakang gelap */
+    background: #fff; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Shadow sedikit lebih gelap */
     border-radius: 8px;
     overflow: hidden;
 }
@@ -40,10 +44,11 @@ body {
 }
 
 .product-card:hover {
+    /* Menjaga konsistensi: menggunakan warna yang lebih gelap untuk hover */
     background-color: #e9ecef;
     border-color: #007bff;
     transform: translateY(-2px);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 }
 
 .product-card p {
@@ -129,7 +134,7 @@ body {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0,0,0,0.6); /* Sedikit lebih gelap agar modal menonjol */
 }
 
 .modal-content {
@@ -139,7 +144,7 @@ body {
     border: 1px solid #888;
     width: 300px;
     border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5); /* Shadow lebih gelap */
 }
 
 .modal-content h2 {
