@@ -1,7 +1,7 @@
 # Cashier: Kasir Digital Sederhana Berbasis Browser
 
 ## 📝 Deskripsi Proyek
-Cashier adalah sistem kasir digital sederhana yang dibangun murni menggunakan teknologi Front-End: **HTML, CSS, dan JavaScript**. Website ini memungkinkan pengguna untuk menambahkan produk dari inventori, menghitung subtotal, diskon, pajak (PPN 11%), dan menghasilkan total akhir. Data inventori tersimpan dalam variabel JavaScript.
+Cashier adalah sistem kasir digital sederhana yang dibangun murni menggunakan teknologi Front-End: **HTML, CSS, dan JavaScript**. Website ini memudahkan pengguna untuk menambahkan produk dari inventori, menghitung subtotal, diskon, pajak (PPN 11%), dan menghasilkan total akhir. Data inventori tersimpan dalam variabel JavaScript.
 
 ## 🚀 Fitur Utama
 - **Inventori Produk:** Daftar produk yang sudah ditentukan.
