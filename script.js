@@ -179,6 +179,7 @@ function generateReceipt() {
         <p style="text-align: center;">-------------------------</p>
         <p style="text-align: center;">Cashier Pecel Lele Persela</p>
         <p style="text-align: center;">Jl. Veteran NO. 55A, Jetis, Lamongan</p>
+        <p style="text-align: center;">Kasir : arif</p>
         <p style="text-align: center;">Tgl: ${new Date().toLocaleDateString('id-ID')}</p>
         <p style="text-align: center;">-------------------------</p>
         <p><strong>ITEM PESANAN</strong></p>
