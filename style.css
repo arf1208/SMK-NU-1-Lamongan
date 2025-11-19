@@ -13,7 +13,7 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     /* Ubah warna kontainer utama agar tetap menonjol di latar belakang gelap */
-    background: #fff; 
+    background: #343a40; 
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Shadow sedikit lebih gelap */
     border-radius: 8px;
     overflow: hidden;
